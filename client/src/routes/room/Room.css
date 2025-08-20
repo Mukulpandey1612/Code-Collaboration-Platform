@@ -1,0 +1,261 @@
+/* Room Container */
+.room {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Sidebar Styles */
+.roomSidebar {
+  width: 280px; /* A good fixed width */
+  background: #1c1e29;
+  border-right: 1px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+/* Sidebar Header */
+.roomSidebarHeader {
+  padding: 1rem;
+  border-bottom: 1px solid #30363d;
+}
+
+.roomSidebarHeader h3 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  word-break: break-all;
+}
+
+.roomSidebarHeader p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #a0aec0;
+}
+
+/* Wrapper for main content to add padding */
+.roomSidebarContent {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; /* Space between sections */
+}
+
+
+/* Language and Keybinding Fields */
+.fieldLabel {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.languageField {
+  width: 100%;
+  padding: 8px 10px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.languageField:focus {
+  border-color: #4aed88;
+}
+
+/* Users Section */
+.usersSection {
+  flex-grow: 1; /* Pushes buttons to the bottom */
+  display: flex;
+  flex-direction: column;
+}
+
+.usersTitle {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 0.5rem;
+}
+
+.roomSidebarUsers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roomSidebarUsersEach {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: rgba(13, 17, 23, 0.5);
+  border-radius: 6px;
+  border: 1px solid #30363d;
+}
+
+.roomSidebarUsersEachAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.roomSidebarUsersEachName {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.youLabel {
+  color: #4aed88;
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+/* Sidebar Actions (Buttons) */
+.roomSidebarActions {
+  padding: 1rem;
+  border-top: 1px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.roomSidebarBtn, .roomSidebarCopyBtn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-transform: uppercase;
+}
+
+.roomSidebarBtn:hover, .roomSidebarCopyBtn:hover {
+    transform: translateY(-2px);
+}
+
+.roomSidebarBtn {
+  background: #e53e3e;
+  color: white;
+}
+
+.roomSidebarCopyBtn {
+  background: #4aed88;
+  color: #1a202c;
+}
+
+/* --- 🔥 UPDATED & NEW STYLES START HERE --- */
+
+/* Style for the Run Code button */
+.runBtn {
+  background: #3b82f6; /* Blue color */
+}
+
+.runBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* AI Button */
+.aiBtn {
+  background: #8b5cf6; /* A nice purple for AI */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px; /* Space between buttons */
+}
+
+.aiBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Editor Section Layout */
+.editorSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editorControls {
+    background: #1c1e29;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #30363d;
+    flex-shrink: 0; /* Prevent this bar from shrinking */
+}
+
+.roomCodeEditor {
+  flex-grow: 1; /* Allow editor to take up available space */
+  height: 100% !important; /* Let flexbox control height */
+  width: 100% !important;
+}
+
+/* Output Section Container */
+.outputContainer {
+  display: flex;
+  height: 30%; /* Set a fixed height for the container */
+  flex-shrink: 0; /* Prevent this container from shrinking */
+}
+
+.outputPanel, .aiPanel {
+  flex: 1; /* Each takes up half the space */
+  width: 50%;
+  background: #111827;
+  color: #e5e7eb;
+  border-top: 1px solid #30363d;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.aiPanel {
+  border-left: 1px solid #30363d;
+}
+
+.outputPanel h4, .aiPanel h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.outputBox {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Monaco', monospace;
+  font-size: 0.9rem;
+  flex-grow: 1;
+  overflow-y: auto; /* Add a scrollbar if output is long */
+}

@@ -1,0 +1,162 @@
+/* General Page Styles */
+.homePageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #fff;
+  background: #111827;
+  background: linear-gradient(180deg, #0d1b2a 0%, #1b333b 50%, #006d77ee 100%);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #e5e7eb;
+}
+
+.header p {
+  font-size: 1.125rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+
+/* Features Section */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 3rem;
+}
+
+.featureCard {
+  background: rgba(31, 41, 55, 0.5);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.featureCard p {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Room Actions Section */
+.roomActions {
+  display: flex; /* Changed */
+  flex-direction: column; /* Changed */
+  width: 100%;
+  max-width: 900px;
+  background: rgba(31, 41, 55, 0.5);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.usernameWrapper {
+    width: 100%;
+    margin-bottom: 1.5rem; /* Space between username and columns */
+}
+
+.actionColumns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.actionBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.actionBox h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.actionBox p {
+  color: #9ca3af;
+  margin: 0 0 1.5rem 0;
+  flex-grow: 1; /* Pushes button down */
+}
+
+/* Inputs and Buttons */
+.inputBox {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: #e5e7eb;
+  background: #111827;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.inputBox::placeholder {
+  color: #6b7280;
+}
+
+.inputBox:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.primaryBtn {
+  background: #3b82f6;
+  color: white;
+}
+.primaryBtn:hover {
+  background: #2563eb;
+}
+
+.secondaryBtn {
+  background: #4b5563;
+  color: #e5e7eb;
+  margin-top: 1rem;
+}
+.secondaryBtn:hover {
+  background: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .featuresGrid, .actionColumns {
+    grid-template-columns: 1fr;
+  }
+}
