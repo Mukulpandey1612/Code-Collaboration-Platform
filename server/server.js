@@ -215,6 +215,13 @@ io.on('connection', function (socket) {
     roomID_to_Code_Map[roomId]['code'] = code;
     socket.to(roomId).emit("on code change", { code });
   });
+  //Typing effect
+  socket.on('typing-start', ({ roomId, username }) => {
+    socket.to(roomId).emit('user-typing-start', { username });
+  });
+  socket.on('typing-stop', ({ roomId, username }) => {
+    socket.to(roomId).emit('user-typing-stop', { username });
+  });
 
   socket.on("leave room", ({ roomId }) => {
     socket.leave(roomId);

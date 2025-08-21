@@ -33,6 +33,8 @@ export default function Room() {
     const [isLoading, setIsLoading] = useState(false);
     const [aiResponse, setAiResponse] = useState("");
     const [isAiLoading, setIsAiLoading] = useState(false);
+    const [typingUsers, setTypingUsers] = useState([]);
+    const typingTimeoutRef = useRef(null);
 
     const languagesAvailable = ["javascript", "java", "c_cpp", "python", "typescript", "golang"];
     const codeKeybindingsAvailable = ["default", "emacs", "vim"];
@@ -42,7 +44,18 @@ export default function Room() {
             setFetchedCode(newValue);
             socket.emit("update code", { roomId, code: newValue });
         }
-    }, [socket, roomId]);
+        if (socket && username) {
+            if (typingTimeoutRef.current) {
+                clearTimeout(typingTimeoutRef.current);
+            } else {
+                socket.emit('typing-start', { roomId, username });
+            }
+            typingTimeoutRef.current = setTimeout(() => {
+                socket.emit('typing-stop', { roomId, username });
+                typingTimeoutRef.current = null;
+            }, 1500);
+        }
+    }, [socket, roomId, username]);
 
     const handleLanguageChange = useCallback((e) => {
         if (socket) {
@@ -88,13 +101,11 @@ export default function Room() {
                     code: fetchedCode
                 })
             });
-
             const result = await response.json();
             if (result.stdout) setOutput(result.stdout);
             else if (result.stderr) setOutput(result.stderr);
             else if (result.compile_output) setOutput(result.compile_output);
             else setOutput("Execution finished with no output.");
-            
         } catch (error) {
             setOutput("An error occurred. Could not run the code.");
         } finally {
@@ -102,7 +113,7 @@ export default function Room() {
         }
     };
 
-    // 👇 THIS FUNCTION HAS BEEN CORRECTED
+    // 👇 THIS IS THE CORRECTED AI HANDLER FUNCTION
     const handleAiRequest = async (prompt) => {
         const editor = editorRef.current?.editor;
         if (!editor) return;
@@ -126,10 +137,8 @@ export default function Room() {
                     prompt: prompt
                 })
             });
-
             const result = await response.json();
             setAiResponse(result.response || "No response from AI.");
-
         } catch (error) {
             setAiResponse("An error occurred. Could not get a response from the AI.");
         } finally {
@@ -151,6 +160,22 @@ export default function Room() {
             socket.off("updating client list", handleUpdateClientList);
             socket.off("on language change", handleLanguageChange);
             socket.off("on code change", handleCodeChange);
+        };
+    }, [socket]);
+    
+    useEffect(() => {
+        if (!socket) return;
+        const handleUserTypingStart = ({ username }) => {
+            setTypingUsers(prev => [...new Set([...prev, username])]);
+        };
+        const handleUserTypingStop = ({ username }) => {
+            setTypingUsers(prev => prev.filter(u => u !== username));
+        };
+        socket.on('user-typing-start', handleUserTypingStart);
+        socket.on('user-typing-stop', handleUserTypingStop);
+        return () => {
+            socket.off('user-typing-start', handleUserTypingStart);
+            socket.off('user-typing-stop', handleUserTypingStop);
         };
     }, [socket]);
 
@@ -215,12 +240,14 @@ export default function Room() {
                                     <div className="roomSidebarUsersEachName">
                                         {user}
                                         {user === username && <span className="youLabel"> (You)</span>}
+                                        {typingUsers.includes(user) && <span className="typing-indicator">typing...</span>}
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
+
                 <div className="roomSidebarActions">
                     <button className="roomSidebarCopyBtn" onClick={copyToClipboard}>
                         COPY ROOM ID
@@ -273,6 +300,7 @@ export default function Room() {
                     </div>
                 </div>
             </div>
+            
             <Toaster position="top-right" />
         </div>
     );
