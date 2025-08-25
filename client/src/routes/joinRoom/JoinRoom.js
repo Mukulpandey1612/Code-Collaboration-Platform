@@ -11,6 +11,12 @@ export default function JoinRoom() {
 
     const handleCreateRoom = (e) => {
         e.preventDefault();
+        //prevent creating a new room if a room ID is already entered
+        if (roomId.trim()) {
+        toast.error("You have entered a Room ID. Please click 'Join Room' instead.");
+        return;
+    }
+
         if (!username.trim() || username.trim().length < 2) {
             toast.error("Please enter a valid username (at least 2 characters) first.");
             return;
@@ -42,8 +48,8 @@ export default function JoinRoom() {
     return (
         <div className="homePageWrapper">
             <header className="header">
-                <h1>&lt;&gt; CodeSync</h1>
-                <p>Real-time collaborative code editing platform</p>
+                <h1>&lt;/&gt;CodeSync</h1>
+                <p>Real-time Collaborative Coding Platform</p>
             </header>
 
             <section className="featuresGrid">
