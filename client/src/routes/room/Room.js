@@ -286,7 +286,7 @@ export default function Room() {
                     enableLiveAutocompletion={true}
                     enableBasicAutocompletion={true}
                     editorProps={{ $blockScrolling: true }}
-                    setOptions={{ showLineNumbers: true }}
+                    setOptions={{ showLineNumbers: true, showPrintMargin: false }}
                 />
                 
                 <div className="outputContainer">
