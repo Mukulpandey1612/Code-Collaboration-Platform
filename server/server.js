@@ -12,7 +12,7 @@ require('dotenv').config();
 // --- Middleware Setup ---
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client/build')));
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
 // --- Server and Socket.io Initialization ---
 const server = http.createServer(app);
@@ -246,9 +246,9 @@ io.on('connection', function (socket) {
  * SPA Fallback - IMPORTANT: Must be last
  * ===============================
  */
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 
 // --- Server Listening ---
