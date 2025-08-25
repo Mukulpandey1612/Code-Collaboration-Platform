@@ -25,7 +25,7 @@ export default function SocketWrapper({ children }) {
     // Initialize socket connection only once
     useEffect(() => {
         if (!socketRef.current) {
-            const serverUrl = process.env.REACT_APP_WEB_SOCKET_URL || "http://localhost:5000";
+            const serverUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
             console.log('Connecting to:', serverUrl);
             
             socketRef.current = io(serverUrl, {
